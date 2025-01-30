@@ -1,18 +1,10 @@
-Script started on Wed Jan 29 21:31:47 2025
-Restored session: Wed Jan 29 21:30:33 MST 2025
-[1m[7m%[27m[1m[0m                                                                                                                                ]7;file://Christians-MacBook-Pro.local/Users/caburt[0m[27m[24m[J(base) caburt@Christians-MacBook-Pro ~ % [K[?2004hccd Software[1m/[0m[0m/ASTR_400B[1m/[0m[0m/sc  [?2004l
-[1m[7m%[27m[1m[0m                                                                                                                                ]7;file://Christians-MacBook-Pro.local/Users/caburt/Software/ASTR_400B[0m[27m[24m[J(base) caburt@Christians-MacBook-Pro ASTR_400B % [K[?2004hcconda activate astr-400b[?2004l
-[1m[7m%[27m[1m[0m                                                                                                                                ]7;file://Christians-MacBook-Pro.local/Users/caburt/Software/ASTR_400B[0m[27m[24m[J(astr-400b) caburt@Christians-MacBook-Pro ASTR_400B % [K[?2004hppython3 ParticleProperties.py[?2004l
+(base) caburt@Christians-MacBook-Pro ~ % cd Software/ASTR_400B/
+(base) caburt@Christians-MacBook-Pro ASTR_400B % conda activate astr-400b
+(astr-400b) caburt@Christians-MacBook-Pro ASTR_400B % python3 ParticleProperties.py
 
 Particle 100 of type 2 at time = 0.0 Myr has the following properties:
 Mass = 1000000.0 solMass
 Distance = 4.245 kpc = 13845.338 lyr
 Velocity = 312.135 km / s
 
-[1m[7m%[27m[1m[0m                                                                                                                                ]7;file://Christians-MacBook-Pro.local/Users/caburt/Software/ASTR_400B[0m[27m[24m[J(astr-400b) caburt@Christians-MacBook-Pro ASTR_400B % [K[?2004heexit[?2004l
-
-Saving session...
-...saving history...truncating history files...
-...completed.
-
-Script done on Wed Jan 29 21:33:46 2025
+(astr-400b) caburt@Christians-MacBook-Pro ASTR_400B % exit
