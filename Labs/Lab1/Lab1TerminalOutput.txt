@@ -1,0 +1,12 @@
+Given R_o=8.34 kpc, the velocity of the local standard of rest is 239.932 km / s
+Given R_o=8.178 kpc, the velocity of the local standard of rest is 235.034 km / s
+Given R_o=7.9 kpc, the velocity of the local standard of rest is 226.628 km / s
+
+The orbital period of the Sun is 0.203 Gyr
+
+If the Sun were in a circular orbit around the Milky Way and were as old as the universe, it would have completed 67.918 revolutions
+
+In the Isothermal Sphere model, 1.05e+11 solMass is enclosed within the solar orbital radius
+In the Isothermal Sphere model, 3.34e+12 solMass is enclosed within a radius of 260 kpc
+
+In the Hernquist model, 1.295147e+12 solMass is enclosed within a radius of 260 kpc
