@@ -98,21 +98,30 @@ def main() -> None:
     u.add_enabled_units(TMsun)
 
     filenames = ['MW_000.txt','M31_000.txt','M33_000.txt']
-    massTable = np.zeros((3,6),dtype=object) # Creates a 3x6 2D array with all values set to 0.
+    massTable = np.zeros((4,6),dtype=object) # Creates a 3x6 2D array with all values set to 0.
 
     for i,j in np.ndindex(massTable.shape): # Iterates through 2D array
-        if j == 0:
-            massTable[i,j] = filenames[i][:-8] # List of galaxies
-        elif j <= 3:
-            massTable[i,j] = ComponentMass(filenames[i],j).value # Component masses
-            # NOTE: Here, I strip the custom units that I went through the trouble of defining.
-            #       I could have not bothered with the units at all. I wanted the units to
-            #       remain an integral part of the value, and only remove it for the sake of
-            #       table formatting. Perhaps I'm just stubborn.
-        elif j == 4:
-            massTable[i,j] = sum(massTable[i,1:4]) # Total mass
+        # Finding values for local group
+        if i == 3: # I completely forgot to do this, so my solution is not very elegant
+            if j == 0:
+                massTable[i,j] = "Local Group"
+            else:
+                massTable[i,j] = np.round(sum(massTable[:3,j]),3) # Summation of previous columns
+                massTable[i,5] /= i # Dividing the sum by the number of galaxies gives the average baryon fraction
+                massTable[i,5] = np.round(massTable[i,5],3) # Rounding the quotient
         else:
-            massTable[i,j] = np.round(sum(massTable[i,2:4])/massTable[i,4],3) # Baryon fraction
+            if j == 0:
+                massTable[i,j] = filenames[i][:-8] # List of galaxies
+            elif j <= 3:
+                massTable[i,j] = ComponentMass(filenames[i],j).value # Component masses
+                # NOTE: Here, I strip the custom units that I went through the trouble of defining.
+                #       I could have not bothered with the units at all. I wanted the units to
+                #       remain an integral part of the value, and only remove it for the sake of
+                #       table formatting. Perhaps I'm just stubborn.
+            elif j == 4:
+                massTable[i,j] = sum(massTable[i,1:4]) # Total mass
+            else:
+                massTable[i,j] = np.round(sum(massTable[i,2:4])/massTable[i,4],3) # Baryon fraction
 
     # Saves massList into an astropy Table with appropriate column names
     data = Table(massTable, names=(
