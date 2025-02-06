@@ -1,0 +1,53 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[a4paper, margin=0.5in]{geometry} % Adjusts margin size
+
+% \usepackage{natbib}
+
+\title{Homework 3 — pdf portion} 
+\author{Christian Burt\\ASTR 400B}
+\date{February 6, 2025}
+
+% The preamble ends with the command \begin{document}
+\begin{document}
+\maketitle
+\setcounter{section}{2} % Section counter += 2
+    
+    \section{Table of Galactic Masses}
+    
+    \input{hw3-table.tex}
+    
+    \section{Questions}
+
+    \begin{enumerate}
+        \item MW and M31 have masses that differ by $\le \, 10^{10} M_\odot$
+          or 1\% of their respective total masses according to this simulation
+          
+        \item Per Table \ref{tab:galaxyMasses}, MW has a total stellar mass of
+          $0.085 \cdot 10^{12} M_\odot$ and M31 has a total stellar mass of
+          $0.139 \cdot 10^{12} M_\odot$, meaning M31 has a greater stellar
+          mass. The relation between stellar mass and luminosity is very
+          intricate and not fully known, but is broadly true that a larger
+          stellar mass corresponds to a larger stellar luminosity. Therefore,
+          we can say that M31 is also more luminous.
+
+        \item Per Table \ref{tab:galaxyMasses}, MW has a total halo mass of
+          $1.975 \cdot 10^{12} M_\odot$ and M31 has a total stellar mass of
+          $1.921 \cdot 10^{12} M_\odot$, meaning MW has a $\sim3\%$ greater
+          mass of dark matter. It is not immediately intuitive why M31 has a
+          larger stellar mass but MW has a larger halo mass, and I would
+          suspect the answer to this question lies in the history of mergers
+          both galaxies experienced.
+
+        \item The baryon fraction of both galaxies are signficantly lower than
+          the baryon fraction of the universe. I suspect this is due to
+          dissipation of gas and ejected stars throughout the lifetime of the
+          galaxies.
+    \end{enumerate}
+    
+
+% \bibliographystyle{plainnat}
+% \bibliography{332}
+\end{document}
