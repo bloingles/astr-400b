@@ -1,0 +1,32 @@
+QUESTION 1
+
+The Milky Way has a center-of-mass position vector of [-2.07  2.95 -1.45] kpc
+and a velocity vector of [ 0.24 -0.26  0.02] km / s
+
+M31 has a center-of-mass position vector of [-377.66  611.43 -284.64] kpc
+and a velocity vector of [ 0.47 -0.27 -0.03] km / s
+
+M33 has a center-of-mass position vector of [-476.22  491.44 -412.4 ] kpc
+and a velocity vector of [-0.03  0.01  0.02] km / s
+
+QUESTION 2
+
+The separation between MW and M31 is 
+769.098 kpc
+The relative velocity of MW with respect to M31 is 
+0.236 km / s
+
+QUESTION 3
+
+The separation between M33 and M31 is 
+201.083 kpc
+The relative velocity of M33 with respect to M31 is 
+0.575 km / s
+
+QUESTION 4
+
+Using an iterative process to find the center of mass will be critical when
+        stars between the Milky Way and Andromeda start mixing. Gravitational interactions
+        will greatly increase the distance of some stars from the center, creating outliers
+        that will skew the data, and an iterative method will remove them from the dataset
+  
