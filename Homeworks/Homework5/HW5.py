@@ -68,7 +68,7 @@ class MassProfile:
                                                                     # center of mass position
             rIndices = np.where(R < r_i*u.kpc) # removes particles with radii larger than the
                                                # iteration radius r_i
-            m_enc[i] = np.sum(self.m[rIndices]) # sums all the masses of a given particle type
+            m_enc[i] = np.sum(m[rIndices]) # sums all the masses of a given particle type
                                                 # enclosed in r_i
         m_enc = m_enc*10**10*u.Msun # Apply units before returning
         return m_enc
@@ -164,10 +164,10 @@ def main() -> None:
     M31 = MassProfile('M31',0)
     M33 = MassProfile('M33',0)
 
-    aMW,aM31,aM33 = 18,16,11 # Scale radii
-    MWhalo = MW.MassEnclosed(1,np.array([30])) # MW halo mass enclosed in 30 kpc
-    M31halo = M31.MassEnclosed(1,np.array([30])) # M31 halo mass enclosed in 30 kpc
-    M33halo = M33.MassEnclosed(1,np.array([30])) # M33 halo mass enclosed in 30 kpc
+    aMW,aM31,aM33 = 61,59,25 # Scale radii
+    MWhalo = MW.MassEnclosed(1,np.array([1000])) # MW halo mass enclosed in 30 kpc
+    M31halo = M31.MassEnclosed(1,np.array([1000])) # M31 halo mass enclosed in 30 kpc
+    M33halo = M33.MassEnclosed(1,np.array([1000])) # M33 halo mass enclosed in 30 kpc
     
     
     ### QUESTION 8: Milky Way Mass Profile
@@ -182,7 +182,7 @@ def main() -> None:
     # plots the Hernquist mass profile
     axMW.plot(r,MW.HernquistMass(r,aMW,MWhalo),c='orange',label='Hernquist',linestyle='dashdot')
     axMW.set(
-        title=r'$\text{MW Mass Profile}\,\,(a=%i\,\text{kpc})$'.replace(r'%i',str(a)),
+        title=r'$\text{MW Mass Profile}\,\,(a=%i\,\text{kpc})$'.replace(r'%i',str(aMW)),
         xlabel=r"$\text{R}_\text{com}\,[\text{kpc}]$",
         ylabel=r"$\text{M}_\text{enc}\,[\text{M}_\odot]$"
     )
@@ -202,7 +202,7 @@ def main() -> None:
     # plots the Hernquist mass profile
     axM31.plot(r,M31.HernquistMass(r,aM31,M31halo),c='orange',label='Hernquist',linestyle='dashdot')
     axM31.set(
-        title=r'$\text{M31 Mass Profile}\,\,(a=%i\,\text{kpc})$'.replace(r'%i',str(a)),
+        title=r'$\text{M31 Mass Profile}\,\,(a=%i\,\text{kpc})$'.replace(r'%i',str(aM31)),
         xlabel=r"$\text{R}_\text{com}\,[\text{kpc}]$",
         ylabel=r"$\text{M}_\text{enc}\,[\text{M}_\odot]$"
     )
@@ -222,7 +222,7 @@ def main() -> None:
     # plots the Hernquist mass profile
     axM33.plot(r,M33.HernquistMass(r,aM33,M33halo),c='orange',label='Hernquist',linestyle='dashdot')
     axM33.set(
-        title=r'$\text{M33 Mass Profile}\,\,(a=%i\,\text{kpc})$'.replace(r'%i',str(a)),
+        title=r'$\text{M33 Mass Profile}\,\,(a=%i\,\text{kpc})$'.replace(r'%i',str(aM33)),
         xlabel=r"$\text{R}_\text{com}\,[\text{kpc}]$",
         ylabel=r"$\text{M}_\text{enc}\,[\text{M}_\odot]$"
     )
@@ -242,7 +242,7 @@ def main() -> None:
     # plots the rotation curve given the Hernquist mass profile
     axMWv.plot(r,MW.HernquistVCirc(r,aMW,MWhalo),c='orange',label='Hernquist',linestyle='dashdot')
     axMWv.set(
-        title=r'$\text{MW Rotation Curve}\,\,(a=%i\,\text{kpc})$'.replace(r'%i',str(a)),
+        title=r'$\text{MW Rotation Curve}\,\,(a=%i\,\text{kpc})$'.replace(r'%i',str(aMW)),
         xlabel=r"$\text{v}_\text{rot}\,[\text{km/s}]$",
         ylabel=r"$\text{M}_\text{enc}\,[\text{M}_\odot]$"
     )
@@ -261,7 +261,7 @@ def main() -> None:
     # plots the rotation curve given the Hernquist mass profile
     axM31v.plot(r,M31.HernquistVCirc(r,aM31,M31halo),c='orange',label='Hernquist',linestyle='dashdot')
     axM31v.set(
-        title=r'$\text{M31 Rotation Curve}\,\,(a=%i\,\text{kpc})$'.replace(r'%i',str(a)),
+        title=r'$\text{M31 Rotation Curve}\,\,(a=%i\,\text{kpc})$'.replace(r'%i',str(aM31)),
         xlabel=r"$\text{v}_\text{rot}\,[\text{km/s}]$",
         ylabel=r"$\text{M}_\text{enc}\,[\text{M}_\odot]$"
     )
@@ -280,7 +280,7 @@ def main() -> None:
     # plots the rotation curve given the Hernquist mass profile
     axM33v.plot(r,M33.HernquistVCirc(r,aM33,M33halo),c='orange',label='Hernquist',linestyle='dashdot')
     axM33v.set(
-        title=r'$\text{M33 Rotation Curve}\,\,(a=%i\,\text{kpc})$'.replace(r'%i',str(a)),
+        title=r'$\text{M33 Rotation Curve}\,\,(a=%i\,\text{kpc})$'.replace(r'%i',str(aM33)),
         xlabel=r"$\text{v}_\text{rot}\,[\text{km/s}]$",
         ylabel=r"$\text{M}_\text{enc}\,[\text{M}_\odot]$"
     )
