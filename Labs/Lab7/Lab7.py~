@@ -17,7 +17,7 @@ from matplotlib.colors import LogNorm
 
 # my modules
 from ReadFile import Read
-from CenterOfMass2 import CenterOfMass
+from CenterOfMass import CenterOfMass
 from MassProfile import MassProfile
 
 # for contours
@@ -50,7 +50,7 @@ def density_contour(xdata, ydata, nbins_x, nbins_y, ax=None, **contour_kwargs):
 
     """
 
-    H, xedges, yedges = np.histogram2d(xdata, ydata, bins=(nbins_x,nbins_y), density=True)
+    H, xedges, yedges = np.histogram2d(xdata, ydata, bins=(nbins_x,nbins_y), normed=True)
     # NOTE : if you are using the latest version of python, in the above: 
     # instead of normed=True, use density=True
 
@@ -71,14 +71,13 @@ def density_contour(xdata, ydata, nbins_x, nbins_y, ax=None, **contour_kwargs):
     three_sigma = so.brentq(find_confidence_interval, 0., 1., args=(pdf, 0.99))
 
     # You might need to add a few levels
-    custom = so.brentq(find_confidence_interval,0.,1.,args=(pdf,0.88))
 
 
     # Array of Contour levels. Adjust according to the above
-    levels = [one_sigma,custom,two_sigma,three_sigma][::-1]
+    levels = [one_sigma, two_sigma, three_sigma][::-1]
 
     # contour level labels  Adjust accoding to the above.
-    strs = ['0.68','0.88','0.95','0.99'][::-1]
+    strs = ['0.68','0.95', '0.99'][::-1]
 
 
     ###### 
@@ -152,7 +151,6 @@ def RotateFrame(posI,velI):
 
 
 def main() -> None:
-
     # # Lab 7  Contour Plots and Spiral Arms
     # 
     # In this lab you will: 
@@ -225,12 +223,11 @@ def main() -> None:
     # x pos, y pos, contour res, contour res, axis, colors for contours.
     # remember to adjust this if there are other contours added
     # density_contour(pos1, pos2, res1, res2, ax=ax, colors=[])
-    density_contour(xD,yD,80,80,ax=ax,colors=['c','y','w','y'])
 
 
     # Add axis labels
-    plt.xlabel('x (kpc)', fontsize=22)
-    plt.ylabel('y (kpc)', fontsize=22)
+    plt.xlabel(' ', fontsize=22)
+    plt.ylabel(' ', fontsize=22)
 
     #set axis limits
     plt.ylim(-40,40)
@@ -243,6 +240,7 @@ def main() -> None:
 
     # Save to a file
     plt.savefig('Lab7_M31Disk.png')
+    return
 
     # # Part B
     # 
@@ -253,7 +251,7 @@ def main() -> None:
 
     # ADD HERE
     # compute the rotated position and velocity vectors
-    rn,vn = RotateFrame(r,v)
+
 
     # Rotated M31 Disk - EDGE ON
 
@@ -262,7 +260,6 @@ def main() -> None:
 
     # plot the particle density for M31 , 2D histogram
     # ADD HERE
-    plt.hist2d(rn[:,0],rn[:,2],bins=150,norm=LogNorm(),cmap='magma')
 
 
     cbar = plt.colorbar()
@@ -270,8 +267,8 @@ def main() -> None:
 
 
     # Add axis labels
-    plt.xlabel('x (kpc)', fontsize=22)
-    plt.ylabel('z (kpc)', fontsize=22)
+    plt.xlabel(' ', fontsize=22)
+    plt.ylabel(' ', fontsize=22)
 
     #set axis limits
     plt.ylim(-10,10)
@@ -282,12 +279,10 @@ def main() -> None:
     matplotlib.rcParams['xtick.labelsize'] = label_size 
     matplotlib.rcParams['ytick.labelsize'] = label_size
 
-    density_contour(rn[:,0],rn[:,2],80,80,ax=ax,colors=['c','y','w','y'])
-
     # Save to a file
-    plt.savefig('Lab7_EdgeOn_Density.png')
+    #plt.savefig('Lab7_EdgeOn_Density.png')
 
-    
+
     # Rotated M31 Disk - FACE ON
 
     # M31 Disk Density 
@@ -295,8 +290,6 @@ def main() -> None:
 
     # plot the particle density for M31 
     # ADD HERE
-    plt.hist2d(rn[:,0],rn[:,1],bins=150,norm=LogNorm(),cmap='magma')
-
 
     cbar = plt.colorbar()
     cbar.set_label("Number of disk particle per bin", fontsize=15)
@@ -304,7 +297,6 @@ def main() -> None:
     # make the contour plot
     # x pos, y pos, contour res, contour res, axis, colors for contours.
     # ADD HERE
-    density_contour(rn[:,0],rn[:,1],80,80,ax=ax,colors=['c','y','w','y'])
 
     # Add axis labels
     plt.xlabel('  ', fontsize=22)
@@ -320,7 +312,7 @@ def main() -> None:
     matplotlib.rcParams['ytick.labelsize'] = label_size
 
     # Save to a file 
-    plt.savefig('Lab7_FaceOn_Density.png')
+    # plt.savefig('Lab7_FaceOn_Density.png')
 
 
     # # Part C
@@ -337,16 +329,15 @@ def main() -> None:
     # coded by velocity along the 3rd axis
     # plt.scatter(pos1, pos2, c=vel1)
     # ADD HERE 
-    plt.scatter(rn[:,1],rn[:,2],c=vn[:,0])
 
 
     #colorbar
     cbar = plt.colorbar()
-    cbar.set_label('Vx (km/s)', size=22)
+    cbar.set_label('  ', size=22)
 
     # Add axis labels
-    plt.xlabel('y (kpc)', fontsize=22)
-    plt.ylabel('z (kpc)', fontsize=22)
+    plt.xlabel('  ', fontsize=22)
+    plt.ylabel('  ', fontsize=22)
 
 
 
@@ -360,22 +351,14 @@ def main() -> None:
     plt.xlim(-40,40)
 
     # Save file
-    plt.savefig('Lab7_EdgeOn_Vel.png')
+    # plt.savefig('Lab7_EdgeOn_Vel.png')
 
 
     # b) Create a phase diagram for the edge on disk (Position vs. Velocity) using a 2D Histogram.
     # 
     # c) Use the MassProfile Code to overplot the expected circular velocity from the mass profile. 
-    
-    # create a mass profile object using homework
-    M31 = MassProfile('M31',0)
 
-    # array of positions
-    rr = np.arange(0.01,45,0.1)
 
-    # Circular Velocity Profile
-    Vcirc = M31.CircularVelocityTotal(rr)
-    Vcirc = Vcirc.to(u.km/u.s) 
 
     # Make a phase diagram of the R vs V
     # MW Disk Velocity Field edge on.
@@ -385,34 +368,28 @@ def main() -> None:
 
     # Plot 2D Histogram for one component of  Pos vs Vel 
     # ADD HERE
-    plt.hist2d(rn[:,0],vn[:,1],bins=150,norm=LogNorm())
-    plt.colorbar()
 
     # Overplot Circular Velocity from the MassProfile Code
     # ADD HERE
-    plt.plot(rr,Vcirc,c='r')
-    plt.plot(-rr,-Vcirc,c='r')
 
     # Add axis labels
-    plt.xlabel('x (kpc)', fontsize=22)
-    plt.ylabel('y (kpc)', fontsize=22)
+    plt.xlabel(' ', fontsize=22)
+    plt.ylabel(' ', fontsize=22)
 
     #adjust tick label font size
     label_size = 22
     matplotlib.rcParams['xtick.labelsize'] = label_size 
     matplotlib.rcParams['ytick.labelsize'] = label_size
 
+
     # Save file
-    plt.savefig('Lab7_RotationCurve.png')
+    # plt.savefig('Lab7_RotationCurve.png')
 
     # # Part D: Exploring Spiral Structure
 
     # Determine the positions of the disk particles in 
     # cylindrical coordinates. (like in Lab 6)
-    
-    # cyl_r = np.linalg.norm((rn[:,0],rn[:,1]))
-    cyl_r = np.sqrt(rn[:,0]**2+rn[:,1]**2+rn[:,2]**2)
-    cyl_theta = np.arctan2(rn[:,1],rn[:,0])*180/np.pi
+
 
     # Make a phase diagram of R vs Theta
 
@@ -421,21 +398,18 @@ def main() -> None:
 
     # Plot 2D Histogram of r vs theta
     # ADD HERE
-    plt.hist2d(cyl_r,cyl_theta,bins=150,norm=LogNorm())
 
     # Add axis labels
-    plt.xlabel('r (kpc)', fontsize=22)
-    plt.ylabel(r'$\theta$ [\textdegree]', fontsize=22)
+    plt.xlabel(' ', fontsize=22)
+    plt.ylabel(' ', fontsize=22)
 
     #adjust tick label font size
     label_size = 22
     matplotlib.rcParams['xtick.labelsize'] = label_size 
     matplotlib.rcParams['ytick.labelsize'] = label_size
 
-    density_contour(cyl_r,cyl_theta,80,80,ax=ax,colors=['c','y','w','y'])
-
     # Save file
-    plt.savefig('Lab7_SpiralPhase.png')
+    # plt.savefig('Lab7_SpiralPhase.png')
 
 if __name__ == '__main__':
     main()
