@@ -14,17 +14,16 @@ def majorAnnuli(
         delta:float = 0.15
 ) -> list[None|tuple[int,int]]:
     """
-    This function finds the mass of each overlapping annulus and performs a Fourier
-    analysis to compute the bar strength as the different in the root-mean-squared
-    of the even and odd modes
-
+    This function creates the major cylindrical annuli to categorize the stars into such that each
+    annulus has N stars between Nmin and Nmax and each successive annulus satisfies  r_outer/r_inner < 10**delta
+    
     Inputs:
         x (kpc): adjusted sorted x positions of the stars
         y (kpc): adjusted sorted y positions of the stars
         Nmin: The minimum number of stars per annulus
         Nmax: The maximum number of stars per annulus
         delta: A parameter that determines where to divide the annulus
-               r[last-1]/r[first] < 10**delta
+              
     Outputs:
         binIndices: contains the minimum and maximum radius of each annulus
     """
@@ -50,12 +49,10 @@ def overlapAnnuli(
         r:NDArray[np.float64]
 )->list[None|tuple[int,int]]:
     """
-    This function finds the mass of each overlapping annulus and performs a Fourier
-    analysis to compute the bar strength as the different in the root-mean-squared
-    of the even and odd modes
+    This function creates annuli in between the major annuli in preparation for Fourier analysis
 
     Inputs:
-        binIndices: contains the minimum and maximum radius of each annulus
+        binIndices: contains the minimum and maximum radius of each major annulus
         r (kpc): sorted radii of the stars
     Outputs:
         overlapIndices: binIndices with the added overlap regions between them.
@@ -220,5 +217,4 @@ TO DO:
 - Visualization: Find creative ways to portray my findings
   - It would be helpful to have a function that finds the full bar radius and angle
     I have started this, but I need to finish it.
-
 """
