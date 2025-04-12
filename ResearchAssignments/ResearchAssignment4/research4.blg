@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99d (TeX Live 2023)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: research4.aux
+The style file: aasjournal.bst
+Database file #1: ./research.bib
+Warning--entry type for "software-citation-station-zenodo" isn't style-file defined
+--line 336 of file ./research.bib
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Warning--empty publisher in hubble:36
+You've used 17 entries,
+            3168 wiz_defined-function locations,
+            820 strings with 8326 characters,
+and the built_in function-call counts, 7237 in all, are:
+= -- 637
+> -- 458
+< -- 9
++ -- 153
+- -- 163
+* -- 603
+:= -- 1302
+add.period$ -- 19
+call.type$ -- 17
+change.case$ -- 96
+chr.to.int$ -- 17
+cite$ -- 18
+duplicate$ -- 281
+empty$ -- 490
+format.name$ -- 192
+if$ -- 1489
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 16
+newline$ -- 61
+num.names$ -- 68
+pop$ -- 107
+preamble$ -- 1
+purify$ -- 96
+quote$ -- 0
+skip$ -- 248
+stack$ -- 0
+substring$ -- 289
+swap$ -- 0
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 147
+warning$ -- 1
+while$ -- 65
+width$ -- 0
+write$ -- 193
+(There were 2 warnings)

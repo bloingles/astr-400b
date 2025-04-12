@@ -1,0 +1,78 @@
+\begin{thebibliography}{}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\providecommand{\url}[1]{\href{#1}{#1}}
+\providecommand{\dodoi}[1]{doi:~\href{http://doi.org/#1}{\nolinkurl{#1}}}
+\providecommand{\doeprint}[1]{\href{http://ascl.net/#1}{\nolinkurl{http://ascl.net/#1}}}
+\providecommand{\doarXiv}[1]{\href{https://arxiv.org/abs/#1}{\nolinkurl{https://arxiv.org/abs/#1}}}
+
+\bibitem[{{Berentzen} {et~al.}(2003){Berentzen}, {Athanassoula}, {Heller}, \&
+  {Fricke}}]{berentzen:03}
+{Berentzen}, I., {Athanassoula}, E., {Heller}, C.~H., \& {Fricke}, K.~J. 2003,
+  \mnras, 341, 343, \dodoi{10.1046/j.1365-8711.2003.06417.x}
+
+\bibitem[{{Dehnen} {et~al.}(2023){Dehnen}, {Semczuk}, \&
+  {Sch{\"o}nrich}}]{dehnen:23}
+{Dehnen}, W., {Semczuk}, M., \& {Sch{\"o}nrich}, R. 2023, \mnras, 518, 2712,
+  \dodoi{10/.1093/mnras/stac3184}
+
+\bibitem[{{Elmegreen} {et~al.}(2007){Elmegreen}, {Elmegreen}, {Knapen}, {Buta},
+  {Block}, \& {Puerari}}]{elmegreen:07}
+{Elmegreen}, B.~G., {Elmegreen}, D.~M., {Knapen}, J.~H., {et~al.} 2007, \apjl,
+  670, L97, \dodoi{10.1086/524359}
+
+\bibitem[{{Hubble}(1936)}]{hubble:36}
+{Hubble}, E.~P. 1936, {Realm of the Nebulae}
+
+\bibitem[{Hunter(2007)}]{Hunter:2007}
+Hunter, J.~D. 2007, Computing in Science \& Engineering, 9, 90,
+  \dodoi{10.1109/MCSE.2007.55}
+
+\bibitem[{Knapen {et~al.}(2002)Knapen, Pérez-Ramírez, \& Laine}]{knapen:02}
+Knapen, J.~H., Pérez-Ramírez, D., \& Laine, S. 2002, Monthly Notices of the
+  Royal Astronomical Society, 337, 808.
+\newblock \url{https://api.semanticscholar.org/CorpusID:10845683}
+
+\bibitem[{{Mihos} \& {Hernquist}(1996)}]{mihos:96}
+{Mihos}, J.~C., \& {Hernquist}, L. 1996, \apj, 464, 641, \dodoi{10.1086/177353}
+
+\bibitem[{Mutch {et~al.}(2011)Mutch, Croton, \& Poole}]{mutch:11}
+Mutch, S.~J., Croton, D.~J., \& Poole, G.~B. 2011, The Astrophysical Journal,
+  736, 84, \dodoi{10.1088/0004-637x/736/2/84}
+
+\bibitem[{Rathore {et~al.}(2024)Rathore, Choi, Olsen, \& Besla}]{rathore:25}
+Rathore, H., Choi, Y., Olsen, K. A.~G., \& Besla, G. 2024, The Astrophysical
+  Journal, 978, 55, \dodoi{10.3847/1538-4357/ad93ae}
+
+\bibitem[{{Sch{\"o}nrich} \& {McMillan}(2017)}]{schoenrich:17}
+{Sch{\"o}nrich}, R., \& {McMillan}, P.~J. 2017, \mnras, 467, 1154,
+  \dodoi{10.1093/mnras/stx093}
+
+\bibitem[{{van der Marel}(2001)}]{vandermarel:01}
+{van der Marel}, R.~P. 2001, \aj, 122, 1827, \dodoi{10.1086/323100}
+
+\bibitem[{van~der Marel {et~al.}(2012)van~der Marel, Besla, Cox, Sohn, \&
+  Anderson}]{vandermarel:12}
+van~der Marel, R.~P., Besla, G., Cox, T.~J., Sohn, S.~T., \& Anderson, J. 2012,
+  The Astrophysical Journal, 753, 9, \dodoi{10.1088/0004-637X/753/1/9}
+
+\bibitem[{Van~Rossum \& Drake(2009)}]{python}
+Van~Rossum, G., \& Drake, F.~L. 2009, Python 3 Reference Manual (Scotts Valley,
+  CA: CreateSpace)
+
+\bibitem[{{Wagg} \& {Broekgaarden}(2024)}]{software-citation-station-paper}
+{Wagg}, T., \& {Broekgaarden}, F.~S. 2024, arXiv e-prints, arXiv:2406.04405.
+\newblock \doarXiv{2406.04405}
+
+\bibitem[{Wagg {et~al.}(2024)}]{software-citation-station-zenodo}
+Wagg, T., {et~al.} 2024, TomWagg/software-citation-station: v1.2, v1.2,
+  Zenodo, \dodoi{https://doi.org/10.5281/zenodo.13225824}
+
+\bibitem[{{Willman} \& {Strader}(2012)}]{willman:12}
+{Willman}, B., \& {Strader}, J. 2012, \aj, 144, 76,
+  \dodoi{10.1088/0004-6256/144/3/76}
+
+\bibitem[{{Wu} {et~al.}(2018){Wu}, {Pfenniger}, \& {Taam}}]{wu:18}
+{Wu}, Y.-T., {Pfenniger}, D., \& {Taam}, R.~E. 2018, \apj, 860, 152,
+  \dodoi{10.3847/1538-4357/aac5e8}
+
+\end{thebibliography}
