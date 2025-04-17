@@ -144,7 +144,7 @@ class CosmologicalTools:
         """
         
         # FILL THIS IN
-        OmegaM = self.OmegaM0*(1+z)**3*(self.Ho/self.HubbleParameter(z))**2
+        OmegaM = 0
         
         return OmegaM
     
@@ -163,8 +163,7 @@ class CosmologicalTools:
             Radiation Density Parameter at the given redshift.
         """
         # FILL THIS IN
-        OmegaR = self.OmegaR0*(1+z)**4*(self.Ho/self.HubbleParameter(z))**2
-
+        OmegaR = 0
         
         return OmegaR
     
@@ -184,8 +183,7 @@ class CosmologicalTools:
             Dark Energy Density Parameter at the given redshift.
         """
         # FILL THIS IN
-        OmegaL = self.OmegaL0*(1+z)*(self.Ho/self.HubbleParameter(z))**2
-
+        OmegaL = 0
         
         return OmegaL
     
@@ -207,22 +205,23 @@ def main() -> None:
     # Question 1 B) 
 
     # Test Hubble Parameter at z = 0
-    HubbleBenchmarkz0 = BenchMark.HubbleParameter(0)
-    print(HubbleBenchmarkz0)
+    HubbleParameterz0 = BenchMark.HubbleParameter(0)
+    print(HubbleParameterz0)
 
-    print(BenchMark.Ho)
+
+
 
     # Question 1 C) 
 
     # Compute the Hubble Parameter at z = 1 in BenchMark Cosmology
-    HubbleBenchmarkz1 = BenchMark.HubbleParameter(1)
-    print(HubbleBenchmarkz1)
+    HubbleParameterz1 = BenchMark.HubbleParameter(1)
+    print(HubbleParameterz1)
 
 
 
     # Question 1 D) 
     # Define the cosmology for the Einstein De Sitter Universe
-    OmegaMD = 1
+    OmegaMD = 0
     OmegaRD = 0 
     OmegaLD = 0 
     # h is the same as in Benchmark Cosmology
@@ -231,17 +230,15 @@ def main() -> None:
 
 
     # Define a New Instance of the Class with Einstein De Sitter Cosmology 
-    DeSitter = CosmologicalTools(OmegaMD,OmegaRD,OmegaLD,h_planck)
+
 
 
 
     # Compute the Hubble Parameter at z = 1.0 in Einstein De Sitter Cosmology
-    HubbleDeSitterz1 = DeSitter.HubbleParameter(1)
-    print(HubbleDeSitterz1)
 
 
     # Is the recession velocity of a galaxy at a given distance larger or smaller than in the benchmark cosmology at z=1?
-    # Larger
+    # 
 
     # 
     # ## B) 
@@ -256,15 +253,6 @@ def main() -> None:
 
 
     # Question 2 B) 
-    
-    # Define an array of redshift 
-    zmax = 10**5
-    zmin = -0.9
-    zrange = np.arange(zmin, zmax, 0.01)
-
-    OmegaM_z = BenchMark.OmegaM_Z(zrange) # Matter
-    OmegaR_z = BenchMark.OmegaR_Z(zrange) # Radiation
-    OmegaL_z = BenchMark.OmegaL_Z(zrange) # Dark Energy
 
 
     # Plot the Redshift Evolution of OmegaM, OmegaR and OmegaL
@@ -273,20 +261,26 @@ def main() -> None:
     fig = plt.figure(figsize=(10,10))
     ax = plt.subplot(111)
 
+    # Define an array of redshift 
+    zmax = 10**5
+    zmin = -0.9
+    zrange = np.arange(zmin, zmax, 0.01)
+
+
     # Evolution of Matter Density Parameter as a function of 1+z
     # FILL THIS IN
-    plt.semilogx(1+zrange,OmegaM_z,color='blue', linewidth=5, 
-                 label=r'$\Omega_M$(z)')
+    #plt.semilogx(  , color='blue', linewidth=5, 
+    #             label=r'$\Omega_M$(z)')
 
     # Evolution of Radiation Density Parameter 
     # FILL THIS IN 
-    plt.semilogx(1+zrange,OmegaR_z,color='red', linewidth=5, 
-                 linestyle="--", label=r'$\Omega_R$(z)')
+    #plt.semilogx(  , color='red', linewidth=5, 
+    #             linestyle="--", label=r'$\Omega_R$(z)')
 
     # Evolution of Dark Energy Density Parameter 
     # FILL THIS IN
-    plt.semilogx(1+zrange,OmegaL_z,color='black', linewidth=5, 
-                 linestyle=":", label=r'$\Omega_L$(z)')
+    #plt.semilogx(  , color='black', linewidth=5, 
+    #             linestyle=":", label=r'$\Omega_L$(z)')
 
     # Add a vertical line to indicate today 
 
@@ -306,7 +300,7 @@ def main() -> None:
                     bbox_to_anchor=(0.5, 1.05),ncol=3, fancybox=True, shadow=True)
 
     # Save to a file
-    plt.savefig('Lab11_DensityParameterEvolution.png')
+    #plt.savefig('Lab11_DensityParameterEvolution.png')
 
 
     # 
