@@ -59,7 +59,7 @@ def overlapAnnuli(
         overlapIndices: binIndices with the added overlap regions between them.
     """
 
-    overlapIndices:list[None|tuple[int,int]] = binIndices.copy()
+    overlapIndices:list[None|tuple[int,int]] = binIndices[:]
     for j in range(len(binIndices)-1):
         small1:int
         small2:int
@@ -135,9 +135,13 @@ def barStrength(
     mModes:NDArray[np.float64] = np.arange(1,mMax+1)
     strengthsList:list[None|float] = []
     for (first, last) in annuli:
+        '''
         i = np.where((first<r) & (r<last))
         mAnnuli:NDArray[np.float64] = m[i]
         phiAnnuli:NDArray[np.float64] = phi[i]
+        '''
+        mAnnuli:NDArray[np.float64] = m[first:last]
+        phiAnnuli:NDArray[np.float64] = phi[first:last]
 
         MProf:NDArray[np.float64]
         MProf,_ = np.histogram(phiAnnuli,bins=nphi,range=(0,2*np.pi),weights=mAnnuli)
@@ -155,6 +159,56 @@ def barStrength(
     strengthsArr:NDArray[np.float64] = np.array(strengthsList)
     galaxyStrength:float = np.max(strengthsArr)
     return strengthsArr,galaxyStrength
+'''
+def plotBarStrengthPerAnnulus(
+    strengthsArr:NDArray[np.float64],
+    annuliIndices:tuple[None|tuple[int, int]],
+    snapshot:int,
+    galaxy:str
+) -> None:
+
+    r:NDArray[np.float64]  = np.array([0.5*(first+last) for first,last in annuliIndices])
+    dr = np.diff(r)
+    widths = np.empty_like(r)
+    widths[:-1] = dr
+    widths[-1]  = dr[-1]
+
+    fig, ax = plt.subplots()
+    ax.bar(r, strengthsArr, width=widths, align='center', edgecolor='k', alpha=0.7)
+
+    ax.set(title=f"Bar Strength per Annulus\n{galaxy}_{snapshot:03d}",xlabel='Annulus Radius [kpc]',ylabel='Bar Strength')
+    fig.savefig(f"{galaxy}_{snapshot:03d}_bar.pdf")
+'''
+def plotBarStrengthPerAnnulus(
+    strengthsArr: np.ndarray,
+    annuliIndices: list[tuple[int,int]],
+    r: np.ndarray,
+    snapshot: int,
+    galaxy: str
+) -> None:
+    edges:list[int] = [r[first] for first, _ in annuliIndices]
+
+    # This gathers all of the inner edges and the final outer edge`
+    last_first, last_last = annuliIndices[-1]
+    edges.append(r[last_last-1])
+    edges:NDArray = np.array(edges)
+
+    midpoints   = 0.5*(edges[:-1]+edges[1:])
+    widths = edges[1:] - edges[:-1]
+
+    fig, ax = plt.subplots()
+    ax.bar(midpoints, strengthsArr, width=widths, align='center',
+           edgecolor='k', alpha=0.7)
+    ax.set(
+        title=f"Bar Strength per Annulus\n{galaxy}_{snapshot:03d}",
+        xlabel='Radius [kpc]',
+        ylabel='Bar Strength'
+    )
+    # set graph
+    ax.set_xlim(edges[0], edges[-1])
+    ax.set_ylim(0, strengthsArr.max()*1.1)
+
+    fig.savefig(f"{galaxy}_{snapshot:03d}_bar_histogram.pdf")
 
 def plotGalaxyStrengthPerSnapshot(strengths:NDArray[np.float64],galaxy:str) -> None:
     fig,ax = plt.subplots()
@@ -171,18 +225,23 @@ def main() -> None:
     # generate majors from the halfway points between foci
     fociArr:NDArray[np.int_] = np.sort(np.array(foci))
     halfways:NDArray[np.int_] = (fociArr[:-1]+fociArr[1:])//2
-    majors:list[int] = [first,*tuple(halfways),last]
+
+    # Has an unchanging list of majors that resets for each galaxy
+    # This is probably not the best way to do this
+    majorsStatic:list[int] = [first,*tuple(halfways),last-1]
+    majorsDynamic:list[int] = majorsStatic[:]
 
     snapshots:tuple[int,...] = snapshotsCompile(4,foci=foci)
 
     # Parameters
-    Nmin:int = 2000 # minimum number of particles per major annulus
-    Nmax:int = 10000 # maximum number of particles per major annulus
+    Nmin:int = 800 # minimum number of particles per major annulus
+    Nmax:int = 8000 # maximum number of particles per major annulus
     nphi:int = 360 # angle iterations to cover a circle
     mMax:int = nphi//2 # Nyquist frequency for Fourier analysis
     galaxies = ('MW','M31')
     strengths:NDArray[np.float64] = np.zeros((len(snapshots),2))
     for galaxy in galaxies:
+        majorsDynamic = majorsStatic[:]
         for i,snapshot in enumerate(snapshots):
             ScriptDir = os.path.dirname(os.path.abspath(__file__))
             filename = os.path.join(ScriptDir,galaxy,f"{galaxy}_{snapshot:03d}.txt")
@@ -209,31 +268,32 @@ def main() -> None:
             vcom:NDArray[np.float64] = np.vstack((vxcom,vycom,vzcom)).T
 
             rComps,vComps = RotateFrame(rcom,vcom)
-            rUnsorted:NDArray[np.float64] = np.linalg.norm(np.vstack((rComps[0],rComps[1],rComps[2])),axis=0)
+            rUnsorted = np.linalg.norm(rComps, axis=1)
+            #rUnsorted:NDArray[np.float64] = np.linalg.norm(np.vstack((rComps[0],rComps[1],rComps[2])),axis=0)
             ri:int = np.argsort(rUnsorted)
             r:NDArray[np.float64] = rUnsorted[ri]
 
             mass:NDArray[np.float64] = comMass[ri]
-            x:NDArray[np.float64] = rComps[0][ri]
-            y:NDArray[np.float64] = rComps[1][ri]
-            z:NDArray[np.float64] = rComps[2][ri]
+            x:NDArray[np.float64] = rComps[ri,0]
+            y:NDArray[np.float64] = rComps[ri,1]
+            z:NDArray[np.float64] = rComps[ri,2]
 
             # NOTE: The velocity is currently unused
-            vx:NDArray[np.float64] = vComps[0][ri]
-            vy:NDArray[np.float64] = vComps[1][ri]
-            vz:NDArray[np.float64] = vComps[2][ri]
+            vx:NDArray[np.float64] = vComps[ri,0]
+            vy:NDArray[np.float64] = vComps[ri,1]
+            vz:NDArray[np.float64] = vComps[ri,2]
             v:NDArray[np.float64] = np.linalg.norm(np.vstack((vx,vy,vz)),axis=0)
 
 
             majorAnnuliIndices:list[None|tuple[int,int]] = majorAnnuli(x,y,Nmin,Nmax)
+
             overlappingAnnuliIndices:list[None|tuple[int,int]] = overlapAnnuli(majorAnnuliIndices,r)
             strengthsArr,galaxyStrength = barStrength(x,y,mass,overlappingAnnuliIndices,nphi,mMax)
 
             strengths[i] = np.array([snapshot,galaxyStrength])
-            if majors and snapshot > min(majors):
-                # plotBarStrengthPerAnnulus(strengthsArr,overlappingAnnuliIndices,r,snapshot,galaxy)
-                majors.pop(0)
-                print(snapshot)
+            if majorsDynamic and snapshot >= min(majorsDynamic):
+                plotBarStrengthPerAnnulus(strengthsArr,overlappingAnnuliIndices,r,snapshot,galaxy)
+                majorsDynamic.pop(0)
         plotGalaxyStrengthPerSnapshot(strengths,galaxy)
 
 if __name__ == '__main__':
