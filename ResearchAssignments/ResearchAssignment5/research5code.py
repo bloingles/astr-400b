@@ -159,26 +159,7 @@ def barStrength(
     strengthsArr:NDArray[np.float64] = np.array(strengthsList)
     galaxyStrength:float = np.max(strengthsArr)
     return strengthsArr,galaxyStrength
-'''
-def plotBarStrengthPerAnnulus(
-    strengthsArr:NDArray[np.float64],
-    annuliIndices:tuple[None|tuple[int, int]],
-    snapshot:int,
-    galaxy:str
-) -> None:
 
-    r:NDArray[np.float64]  = np.array([0.5*(first+last) for first,last in annuliIndices])
-    dr = np.diff(r)
-    widths = np.empty_like(r)
-    widths[:-1] = dr
-    widths[-1]  = dr[-1]
-
-    fig, ax = plt.subplots()
-    ax.bar(r, strengthsArr, width=widths, align='center', edgecolor='k', alpha=0.7)
-
-    ax.set(title=f"Bar Strength per Annulus\n{galaxy}_{snapshot:03d}",xlabel='Annulus Radius [kpc]',ylabel='Bar Strength')
-    fig.savefig(f"{galaxy}_{snapshot:03d}_bar.pdf")
-'''
 def plotBarStrengthPerAnnulus(
     strengthsArr: np.ndarray,
     annuliIndices: list[tuple[int,int]],
