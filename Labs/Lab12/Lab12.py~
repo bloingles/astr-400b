@@ -359,14 +359,12 @@ class CosmologicalTools:
         # 1/H(zrange)*speed of light
         # Speed of light is loaded in modules from astropy, but in units of m/s --> need in km/s
         # FILL THIS IN
-        c_kms = c.to(u.km/u.s) # speed of light in km/s
-
-        y = c_kms/self.HubbleParameter(zrange)
+    
         
     
         # Integrate y numerically over zrange and return in units of Mpc
         # FILL THIS IN 
-        DC = simps(y,zrange)*u.Mpc
+        DC = 0
         
         return DC 
     
@@ -396,7 +394,7 @@ class CosmologicalTools:
     
         # Comoving Distance[ independent of time] x the scale factor at the time of observation.
         # FILL THIS IN 
-        DH = self.ComovingDistance(zo,ze)/(1+zo)
+        DH = 0
         
         return DH 
 
@@ -422,9 +420,7 @@ class CosmologicalTools:
         """
 
         # FILL THIS IN
-        zo = 0 # observer today
-
-        DL = self.ComovingDistance(zo,ze)*(1+ze)
+        DL = 0
         
         return  DL
     
@@ -450,10 +446,9 @@ class CosmologicalTools:
         """
     
         #  FILL THIS IN
-        zo = 0
-        DA = self.ComovingDistance(zo,ze)/(1+ze)
+        DA = 0 
         
-        return DA   
+        return  DA   
     
     
     # Question 4 B) 
@@ -481,9 +476,9 @@ class CosmologicalTools:
         angleRad = (angle*u.arcsec).to(u.rad)
     
         # FILL THIS IN
-        size = angleRad.value*self.AngularDiameterDistance(ze)
+        size = 0
     
-        return size.to(u.kpc)
+        return size
     
     
 
@@ -621,70 +616,84 @@ def main() -> None:
 
     # What is the size of the presently observable universe in the Benchmark cosmology ? (pick a large z)
 
-    print(np.round(BenchMark.ProperDistance(0,1000)))
+
+    # In[ ]:
+
 
     # Double Check that the size of the Comoving Distance and Proper Distance are the same
     # since the observer is at z=0 
 
-    print(np.round(BenchMark.ComovingDistance(0,1000)))
+
+    # In[ ]:
+
 
     # What is the size of the presently observable universe in the Einstein De Sitter cosmology? (pick a large z)
 
-    print(np.round(DeSitter.ComovingDistance(0,1000)))
-    
-    # Which Universe is larger?
-    # The Benchmark universie
+
+    # In[ ]:
+
+
+    # Which Universe is larger? 
 
 
     # ## Question 2 D)
+
+    # In[ ]:
+
 
     # Consider two closely located 
     # galaxies on the sky, where one galaxy
     # is  at z=0.01 and the second galaxy is at z =0.05 
 
-    z1 = 0.01
-    z2 = 0.05
+
+    # In[ ]:
+
 
     # What is Radial Distance between these galaxies today (z=0)? 
     # This is equivalent to the Comoving Distance or Proper Distance between the galaxies
 
-    Dist_z1 = BenchMark.ProperDistance(0,z1) # distance to galaxy 1
-    Dist_z2 = BenchMark.ProperDistance(0,z2) # distance to galaxy 2
 
-    # Separation
+    # In[ ]:
 
-    Diff = Dist_z2 - Dist_z1
-    print(np.round(Diff))
 
     # What is the Proper Distance between these two galaxies as measured by galaxy 1 (at z=0.01)?
-    print(np.round(BenchMark.ProperDistance(z1,z2)))
 
 
     # ## Question 2 E)
 
+    # In[ ]:
+
 
     # What is the size of the observable universe at z=2? 
 
-    print(np.round(BenchMark.ProperDistance(2,1000)))
+
+    # In[ ]:
+
 
     # how much larger was the universe then vs now?
-
-    print(np.round(BenchMark.ProperDistance(2,1000)/BenchMark.ProperDistance(0,1000),3))
 
 
     # ##  Question 2 F)
     # Plot the Horizon Distance as a Function of Redshift out to z=10 for the BenchMark and Einstein DeSitter Cosmology
     # 
 
+    # In[ ]:
+
+
     zmax = 10
     zmin = 0.001
     zrange2 = np.arange(zmin, zmax, 0.5)
 
+
+    # In[ ]:
+
+
     # What is the size of the universe at each redshit in each cosmology
     # We need to again use a list comprehension 
 
-    HorizonBenchmark = [BenchMark.ProperDistance(i,1000).value for i in zrange2]
-    HorizonDeSitter = [DeSitter.ProperDistance(i,1000).value for i in zrange2]
+
+    # In[ ]:
+
 
     # Plot the Horizon Distance as a Function of Redshift out to z=10
     ###############################################################################
@@ -695,9 +704,9 @@ def main() -> None:
 
     # Comoving Distance
     # FILL THIS IN
-    plt.semilogy(zrange2+1,HorizonBenchmark, linewidth=5, label='BenchMark')
+    #plt.semilogy(###, ### , linewidth=5, label='BenchMark')
 
-    plt.semilogy(zrange2+1,HorizonDeSitter  , linewidth=5, linestyle='--', label='DeSitter')
+    #plt.semilogy(### , ###  , linewidth=5, linestyle='--', label='DeSitter')
 
 
     # Add axis labels
@@ -726,37 +735,44 @@ def main() -> None:
     #  Using the Benchmark cosmology, determine this Supernova's redshift and its Proper Distance from us.
     # 
 
+    # In[ ]:
+
 
     # Question 3 B) 
 
-    m = 25.1 # apparent magnitude
-    M = -19.3 # absolute Magnitude Type 1A SNe
-    
+
+    # In[ ]:
+
+
     # What is the Luminosity Distance? 
     # m-M = 5*log(DL/Mpc) + 25
 
-    DLSne = np.round(10**((m-M-25)/5.0),1)*u.Mpc
-    print(DLSne)
+
+    # In[ ]:
 
 
     # Now reverse engineer the problem. What redshift gives you the computed Luminosity Distance? 
     # in reality the redshift is determined by identifying the redshift of the host.  
-    print(BenchMark.LuminosityDistance(1.0945))
-    zSne = 1.0945
 
 
-    # What is the proper distance to this supernova given our current rate of expansion?
-    print(BenchMark.ProperDistance(0,zSne))
+    # In[ ]:
+
+
+    # What is the proper distance to this supernova given our current rate of expansion? 
+
 
     # ## Question 4 C) 
+
+    # In[ ]:
+
 
     # Question 4 C)  
 
     # Angle = Size/DA
     # What is the separation between two galaxies separated by 1 arcsec at z=1 in the Benchmark Cosmology
 
-    sep = np.round(BenchMark.Size(1,1),1)
-    print(sep)
+
+    # In[ ]:
 
 if __name__ == '__main__':
     main()
