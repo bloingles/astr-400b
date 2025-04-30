@@ -1,0 +1,57 @@
+This is BibTeX, Version 0.99d (TeX Live 2023)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: research6.aux
+The style file: aasjournal.bst
+Database file #1: ./research.bib
+Repeated entry---line 294 of file ./research.bib
+ : @article{Hunter:2007
+ :                     ,
+I'm skipping whatever remains of this entry
+Warning--entry type for "scipy_14880408" isn't style-file defined
+--line 341 of file ./research.bib
+Warning--entry type for "software-citation-station-zenodo" isn't style-file defined
+--line 421 of file ./research.bib
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Warning--empty publisher in hubble:36
+You've used 20 entries,
+            3168 wiz_defined-function locations,
+            846 strings with 10606 characters,
+and the built_in function-call counts, 9571 in all, are:
+= -- 746
+> -- 790
+< -- 8
++ -- 262
+- -- 279
+* -- 891
+:= -- 1780
+add.period$ -- 22
+call.type$ -- 20
+change.case$ -- 110
+chr.to.int$ -- 20
+cite$ -- 21
+duplicate$ -- 332
+empty$ -- 574
+format.name$ -- 309
+if$ -- 1911
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 18
+newline$ -- 70
+num.names$ -- 80
+pop$ -- 127
+preamble$ -- 1
+purify$ -- 110
+quote$ -- 0
+skip$ -- 284
+stack$ -- 0
+substring$ -- 330
+swap$ -- 0
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 174
+warning$ -- 1
+while$ -- 73
+width$ -- 0
+write$ -- 227
+(There was 1 error message)
